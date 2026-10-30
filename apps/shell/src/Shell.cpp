@@ -55,28 +55,35 @@ void Shell::executeLine(const QString &input)
 
     QString error;
 
-    auto command = CommandParser::parse(input, &error);
+    auto pipeline = CommandParser::parse(input, &error);
 
-    if (!command)
+    if (!pipeline)
     {
         emit errorReady("orbit: " + error + "\n");
         return;
     }
 
-    if (command->isEmpty())
+    if (pipeline->isEmpty())
         return;
 
-    const QString executable = command->executable;
-
-    if (executable == "cd" ||
-        executable == "pwd" ||
-        executable == "exit")
+    // Initially, handle only standalone built-ins.
+    if (pipeline->commands.size() == 1)
     {
-        executeBuiltin(*command);
-        return;
+        const Command &command = pipeline->commands.first();
+
+        const QString name = command.executable;
+
+        if (name == "cd" ||
+            name == "pwd" ||
+            name == "exit" ||
+            name == "echo")
+        {
+            executeBuiltin(command);
+            return;
+        }
     }
 
-    processManager.execute(*command);
+    processManager.execute(*pipeline);
 }
 
 void Shell::executeBuiltin(const Command &command)
@@ -130,6 +137,14 @@ void Shell::executeBuiltin(const Command &command)
         }
 
         stop();
+    }
+
+    if (name == "echo")
+    {
+        emit outputReady(
+            command.arguments.join(" ") + "\n");
+
+        return;
     }
 }
 

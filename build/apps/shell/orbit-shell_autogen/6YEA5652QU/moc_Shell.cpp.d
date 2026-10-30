@@ -1084,6 +1084,7 @@
   /opt/homebrew/Cellar/qtbase/6.12.0/include/QtCore/QProcess \
   /opt/homebrew/Cellar/qtbase/6.12.0/include/QtCore/QString \
   /opt/homebrew/Cellar/qtbase/6.12.0/include/QtCore/QStringList \
+  /opt/homebrew/Cellar/qtbase/6.12.0/include/QtCore/QVector \
   /opt/homebrew/Cellar/qtbase/6.12.0/lib/QtCore.framework/Versions/A/Headers/q17memory.h \
   /opt/homebrew/Cellar/qtbase/6.12.0/lib/QtCore.framework/Versions/A/Headers/q20bit.h \
   /opt/homebrew/Cellar/qtbase/6.12.0/lib/QtCore.framework/Versions/A/Headers/q20functional.h \
@@ -1191,6 +1192,7 @@
   /opt/homebrew/Cellar/qtbase/6.12.0/lib/QtCore.framework/Versions/A/Headers/qtypeinfo.h \
   /opt/homebrew/Cellar/qtbase/6.12.0/lib/QtCore.framework/Versions/A/Headers/qtypes.h \
   /opt/homebrew/Cellar/qtbase/6.12.0/lib/QtCore.framework/Versions/A/Headers/qutf8stringview.h \
+  /opt/homebrew/Cellar/qtbase/6.12.0/lib/QtCore.framework/Versions/A/Headers/qvector.h \
   /opt/homebrew/Cellar/qtbase/6.12.0/lib/QtCore.framework/Versions/A/Headers/qversiontagging.h \
   /opt/homebrew/Cellar/qtbase/6.12.0/lib/QtCore.framework/Versions/A/Headers/qxptype_traits.h \
   /opt/homebrew/Cellar/qtbase/6.12.0/lib/QtCore.framework/Versions/A/Headers/qyieldcpu.h

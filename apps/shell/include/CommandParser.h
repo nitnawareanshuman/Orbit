@@ -8,7 +8,7 @@
 class CommandParser
 {
 public:
-    static std::optional<Command> parse(
+    static std::optional<Pipeline> parse(
         const QString &input,
         QString *error = nullptr);
 };

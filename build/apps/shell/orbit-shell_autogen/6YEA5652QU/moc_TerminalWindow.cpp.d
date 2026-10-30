@@ -1087,6 +1087,7 @@
   /opt/homebrew/Cellar/qtbase/6.12.0/include/QtCore/QProcess \
   /opt/homebrew/Cellar/qtbase/6.12.0/include/QtCore/QString \
   /opt/homebrew/Cellar/qtbase/6.12.0/include/QtCore/QStringList \
+  /opt/homebrew/Cellar/qtbase/6.12.0/include/QtCore/QVector \
   /opt/homebrew/Cellar/qtbase/6.12.0/include/QtWidgets/QMainWindow \
   /opt/homebrew/Cellar/qtbase/6.12.0/include/QtWidgets/QPlainTextEdit \
   /opt/homebrew/Cellar/qtbase/6.12.0/lib/QtCore.framework/Versions/A/Headers/QList \
@@ -1232,6 +1233,7 @@
   /opt/homebrew/Cellar/qtbase/6.12.0/lib/QtCore.framework/Versions/A/Headers/qutf8stringview.h \
   /opt/homebrew/Cellar/qtbase/6.12.0/lib/QtCore.framework/Versions/A/Headers/qvariant.h \
   /opt/homebrew/Cellar/qtbase/6.12.0/lib/QtCore.framework/Versions/A/Headers/qvarlengtharray.h \
+  /opt/homebrew/Cellar/qtbase/6.12.0/lib/QtCore.framework/Versions/A/Headers/qvector.h \
   /opt/homebrew/Cellar/qtbase/6.12.0/lib/QtCore.framework/Versions/A/Headers/qversiontagging.h \
   /opt/homebrew/Cellar/qtbase/6.12.0/lib/QtCore.framework/Versions/A/Headers/qxptype_traits.h \
   /opt/homebrew/Cellar/qtbase/6.12.0/lib/QtCore.framework/Versions/A/Headers/qyieldcpu.h \

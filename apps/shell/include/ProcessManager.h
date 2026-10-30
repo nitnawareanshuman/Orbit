@@ -4,7 +4,7 @@
 
 #include <QObject>
 #include <QProcess>
-#include <QString>
+#include <QVector>
 
 class ProcessManager : public QObject
 {
@@ -15,7 +15,7 @@ public:
 
     bool isRunning() const;
 
-    void execute(const Command &command);
+    void execute(const Pipeline &pipeline);
 
     void terminate();
 
@@ -27,5 +27,9 @@ signals:
     void processFinished(int exitCode);
 
 private:
-    QProcess *process;
+    QVector<QProcess *> processes;
+
+    bool running = false;
+
+    void cleanup();
 };
