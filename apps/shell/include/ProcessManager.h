@@ -43,6 +43,9 @@ private:
     int nextJobId = 1;
     int foregroundJobId = 0;
 
-    void finishJob(int jobId, int exitCode, QProcess::ExitStatus status);
+    // reportExitError is false for FailedToStart because a concise
+    // "command not found" error has already been emitted.
+    void finishJob(int jobId, int exitCode, QProcess::ExitStatus status,
+                   bool reportExitError = true);
     static QString stateName(const ProcessJob &job);
 };
