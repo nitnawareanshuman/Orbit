@@ -1,0 +1,120 @@
+{
+	"BUILD_DIR" : "/Users/anshuman/Desktop/Orbit/build/apps/filesystem/orbit-filesystem_autogen",
+	"CMAKE_BINARY_DIR" : "/Users/anshuman/Desktop/Orbit/build",
+	"CMAKE_CURRENT_BINARY_DIR" : "/Users/anshuman/Desktop/Orbit/build/apps/filesystem",
+	"CMAKE_CURRENT_SOURCE_DIR" : "/Users/anshuman/Desktop/Orbit/apps/filesystem",
+	"CMAKE_EXECUTABLE" : "/opt/homebrew/bin/cmake",
+	"CMAKE_LIST_FILES" : [ "/Users/anshuman/Desktop/Orbit/apps/filesystem/CMakeLists.txt" ],
+	"CMAKE_SOURCE_DIR" : "/Users/anshuman/Desktop/Orbit",
+	"CROSS_CONFIG" : false,
+	"DEP_FILE" : "/Users/anshuman/Desktop/Orbit/build/apps/filesystem/orbit-filesystem_autogen/deps",
+	"DEP_FILE_RULE_NAME" : "orbit-filesystem_autogen/timestamp",
+	"HEADERS" : 
+	[
+		[
+			"/Users/anshuman/Desktop/Orbit/apps/filesystem/include/FileManagerWidget.h",
+			"MU",
+			"6YEA5652QU/moc_FileManagerWidget.cpp",
+			null
+		],
+		[
+			"/Users/anshuman/Desktop/Orbit/apps/filesystem/include/FileManagerWindow.h",
+			"MU",
+			"6YEA5652QU/moc_FileManagerWindow.cpp",
+			null
+		],
+		[
+			"/Users/anshuman/Desktop/Orbit/apps/filesystem/include/TextEditorWindow.h",
+			"MU",
+			"6YEA5652QU/moc_TextEditorWindow.cpp",
+			null
+		]
+	],
+	"HEADER_EXTENSIONS" : [ "h", "hh", "h++", "hm", "hpp", "hxx", "in", "txx" ],
+	"INCLUDE_DIR" : "/Users/anshuman/Desktop/Orbit/build/apps/filesystem/orbit-filesystem_autogen/include",
+	"MOC_COMPILATION_FILE" : "/Users/anshuman/Desktop/Orbit/build/apps/filesystem/orbit-filesystem_autogen/mocs_compilation.cpp",
+	"MOC_DEFINITIONS" : [ "QT_CORE_LIB", "QT_GUI_LIB", "QT_NO_DEBUG", "QT_WIDGETS_LIB" ],
+	"MOC_DEPEND_FILTERS" : 
+	[
+		[
+			"Q_PLUGIN_METADATA",
+			"[\n][ \t]*Q_PLUGIN_METADATA[ \t]*\\([^\\)]*FILE[ \t]*\"([^\"]+)\""
+		]
+	],
+	"MOC_INCLUDES" : 
+	[
+		"/Users/anshuman/Desktop/Orbit/apps/filesystem/include",
+		"/opt/homebrew/include/QtCore",
+		"/opt/homebrew/lib/QtCore.framework",
+		"/opt/homebrew/share/qt/mkspecs/macx-clang",
+		"/opt/homebrew/include/QtGui",
+		"/opt/homebrew/lib/QtGui.framework",
+		"/opt/homebrew/include/QtWidgets",
+		"/opt/homebrew/lib/QtWidgets.framework",
+		"/usr/local/include",
+		"/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1",
+		"/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include",
+		"/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include",
+		"/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"
+	],
+	"MOC_MACRO_NAMES" : 
+	[
+		"Q_OBJECT",
+		"Q_GADGET",
+		"Q_NAMESPACE",
+		"Q_NAMESPACE_EXPORT",
+		"Q_GADGET_EXPORT",
+		"Q_ENUM_NS"
+	],
+	"MOC_OPTIONS" : [],
+	"MOC_PATH_PREFIX" : false,
+	"MOC_PREDEFS_CMD" : 
+	[
+		"/usr/bin/c++",
+		"-std=c++20",
+		"-w",
+		"-dM",
+		"-E",
+		"/opt/homebrew/share/cmake/Modules/CMakeCXXCompilerABI.cpp"
+	],
+	"MOC_PREDEFS_FILE" : "/Users/anshuman/Desktop/Orbit/build/apps/filesystem/orbit-filesystem_autogen/moc_predefs.h",
+	"MOC_RELAXED_MODE" : false,
+	"MOC_SKIP" : [],
+	"MULTI_CONFIG" : false,
+	"PARALLEL" : 8,
+	"PARSE_CACHE_FILE" : "/Users/anshuman/Desktop/Orbit/build/apps/filesystem/CMakeFiles/orbit-filesystem_autogen.dir/ParseCache.txt",
+	"QT_MOC_EXECUTABLE" : "/opt/homebrew/share/qt/libexec/moc",
+	"QT_UIC_EXECUTABLE" : "/opt/homebrew/share/qt/libexec/uic",
+	"QT_VERSION_MAJOR" : 6,
+	"QT_VERSION_MINOR" : 12,
+	"SETTINGS_FILE" : "/Users/anshuman/Desktop/Orbit/build/apps/filesystem/CMakeFiles/orbit-filesystem_autogen.dir/AutogenUsed.txt",
+	"SOURCES" : 
+	[
+		[
+			"/Users/anshuman/Desktop/Orbit/apps/filesystem/src/FileManagerWidget.cpp",
+			"MU",
+			null
+		],
+		[
+			"/Users/anshuman/Desktop/Orbit/apps/filesystem/src/FileManagerWindow.cpp",
+			"MU",
+			null
+		],
+		[
+			"/Users/anshuman/Desktop/Orbit/apps/filesystem/src/TextEditorWindow.cpp",
+			"MU",
+			null
+		],
+		[
+			"/Users/anshuman/Desktop/Orbit/apps/filesystem/src/main.cpp",
+			"MU",
+			null
+		]
+	],
+	"UIC_OPTIONS" : [],
+	"UIC_SEARCH_PATHS" : [],
+	"UIC_SKIP" : [],
+	"UIC_UI_FILES" : [],
+	"USE_BETTER_GRAPH" : true,
+	"VERBOSITY" : 0
+}

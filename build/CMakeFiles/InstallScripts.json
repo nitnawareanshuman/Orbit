@@ -2,7 +2,8 @@
 	"InstallScripts" : 
 	[
 		"/Users/anshuman/Desktop/Orbit/build/cmake_install.cmake",
-		"/Users/anshuman/Desktop/Orbit/build/apps/shell/cmake_install.cmake"
+		"/Users/anshuman/Desktop/Orbit/build/apps/shell/cmake_install.cmake",
+		"/Users/anshuman/Desktop/Orbit/build/apps/filesystem/cmake_install.cmake"
 	],
 	"Parallel" : false
 }

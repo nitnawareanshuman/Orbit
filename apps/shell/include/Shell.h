@@ -16,6 +16,8 @@ signals:
     void outputReady(const QString &text);
     void errorReady(const QString &text);
     void promptChanged(const QString &directory);
+    void directoryChanged(const QString &directory);
+    void openFileRequested(const QString &absolutePath);
     void shellExited();
 
 private:

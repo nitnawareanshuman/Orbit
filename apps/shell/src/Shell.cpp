@@ -1,6 +1,8 @@
 #include "Shell.h"
 
 #include <QDir>
+#include <QFile>
+#include <QFileInfo>
 #include <QProcessEnvironment>
 
 #ifdef Q_OS_UNIX
@@ -25,9 +27,6 @@ void Shell::executeLine(const QString &input)
     if (!running)
         return;
 
-    // Defensive normalization: TerminalWidget already sends only the editable
-    // command buffer, but stripping surrounding whitespace here ensures no
-    // prompt/display decoration can become the executable token.
     const QString commandLine = input.trimmed();
     if (commandLine.isEmpty())
         return;
@@ -48,7 +47,7 @@ void Shell::executeLine(const QString &input)
         const QString name = command.executable;
         if (name == "cd" || name == "pwd" || name == "exit" || name == "echo" ||
             name == "jobs" || name == "fg" || name == "bg" || name == "kill" ||
-            name == "export" || name == "unset")
+            name == "export" || name == "unset" || name == "mkdir" || name == "cat")
         {
             executeBuiltin(command);
             return;
@@ -85,6 +84,61 @@ void Shell::executeBuiltin(const Command &command)
             return;
         }
         emit promptChanged(currentDirectory());
+        emit directoryChanged(currentDirectory());
+        return;
+    }
+
+    if (name == "mkdir")
+    {
+        if (args.isEmpty())
+        {
+            emit errorReady("orbit: mkdir: missing operand\n");
+            return;
+        }
+        bool makeParents = false;
+        QStringList paths;
+        for (const QString &arg : args) {
+            if (arg == "-p" || arg == "--parents")
+                makeParents = true;
+            else if (arg.startsWith('-')) {
+                emit errorReady("orbit: mkdir: unsupported option: " + arg + '\n');
+                return;
+            } else
+                paths << arg;
+        }
+        if (paths.isEmpty()) {
+            emit errorReady("orbit: mkdir: missing operand\n");
+            return;
+        }
+        bool failed = false;
+        for (const QString &path : paths) {
+            QDir dir;
+            const bool ok = makeParents ? dir.mkpath(path) : dir.mkdir(path);
+            if (!ok) {
+                emit errorReady("orbit: mkdir: cannot create directory '" + path + "'\n");
+                failed = true;
+            }
+        }
+        if (!failed)
+            emit outputReady(QString());
+        emit directoryChanged(currentDirectory());
+        return;
+    }
+
+    if (name == "cat")
+    {
+        if (args.isEmpty()) {
+            emit errorReady("orbit: cat: missing file operand\n");
+            return;
+        }
+        for (const QString &path : args) {
+            QFileInfo info(path);
+            if (!info.exists() || !info.isFile()) {
+                emit errorReady("orbit: cat: " + path + ": no such file\n");
+                continue;
+            }
+            emit openFileRequested(info.absoluteFilePath());
+        }
         return;
     }
 
@@ -136,13 +190,9 @@ void Shell::executeBuiltin(const Command &command)
 
         bool success = false;
         if (name == "fg")
-        {
             success = processManager.foreground(id);
-        }
         else if (name == "bg")
-        {
             success = processManager.background(id);
-        }
         else
         {
 #ifdef Q_OS_UNIX
@@ -150,26 +200,18 @@ void Shell::executeBuiltin(const Command &command)
             if (args.size() > 1 && args.first().startsWith('-'))
             {
                 const QString signalName = args.first().mid(1).toUpper();
-                if (signalName == "KILL")
-                    signalNumber = SIGKILL;
-                else if (signalName == "INT")
-                    signalNumber = SIGINT;
-                else if (signalName == "STOP")
-                    signalNumber = SIGSTOP;
-                else if (signalName == "CONT")
-                    signalNumber = SIGCONT;
+                if (signalName == "KILL") signalNumber = SIGKILL;
+                else if (signalName == "INT") signalNumber = SIGINT;
+                else if (signalName == "STOP") signalNumber = SIGSTOP;
+                else if (signalName == "CONT") signalNumber = SIGCONT;
             }
             success = processManager.signalJob(id, signalNumber);
 #else
             success = processManager.signalJob(id, 15);
 #endif
         }
-
         if (!success)
-        {
-            emit errorReady("orbit: " + name + ": no such active job: %" +
-                            QString::number(id) + '\n');
-        }
+            emit errorReady("orbit: " + name + ": no such active job: %" + QString::number(id) + '\n');
         return;
     }
 
@@ -181,7 +223,6 @@ void Shell::executeBuiltin(const Command &command)
             emit outputReady(environment.join('\n') + '\n');
             return;
         }
-
         for (const QString &assignment : args)
         {
             const int separator = assignment.indexOf('=');
@@ -190,8 +231,7 @@ void Shell::executeBuiltin(const Command &command)
                 emit errorReady("orbit: export: expected NAME=value\n");
                 continue;
             }
-            qputenv(assignment.left(separator).toLocal8Bit(),
-                    assignment.mid(separator + 1).toLocal8Bit());
+            qputenv(assignment.left(separator).toLocal8Bit(), assignment.mid(separator + 1).toLocal8Bit());
         }
         emit promptChanged(currentDirectory());
         return;
@@ -209,7 +249,6 @@ void Shell::stop()
 {
     if (!running)
         return;
-
     running = false;
     processManager.terminate();
     emit outputReady("Orbit Shell terminated.\n");

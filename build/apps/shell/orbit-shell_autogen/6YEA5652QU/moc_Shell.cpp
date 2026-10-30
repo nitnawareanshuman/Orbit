@@ -45,6 +45,9 @@ template <> constexpr inline auto Shell::qt_create_metaobjectdata<qt_meta_tag_ZN
         "errorReady",
         "promptChanged",
         "directory",
+        "directoryChanged",
+        "openFileRequested",
+        "absolutePath",
         "shellExited"
     };
 
@@ -61,8 +64,16 @@ template <> constexpr inline auto Shell::qt_create_metaobjectdata<qt_meta_tag_ZN
         QtMocHelpers::SignalData<void(const QString &)>(5, 2, QMC::AccessPublic, QMetaType::Void, {{
             { QMetaType::QString, 6 },
         }}),
+        // Signal 'directoryChanged'
+        QtMocHelpers::SignalData<void(const QString &)>(7, 2, QMC::AccessPublic, QMetaType::Void, {{
+            { QMetaType::QString, 6 },
+        }}),
+        // Signal 'openFileRequested'
+        QtMocHelpers::SignalData<void(const QString &)>(8, 2, QMC::AccessPublic, QMetaType::Void, {{
+            { QMetaType::QString, 9 },
+        }}),
         // Signal 'shellExited'
-        QtMocHelpers::SignalData<void()>(7, 2, QMC::AccessPublic, QMetaType::Void),
+        QtMocHelpers::SignalData<void()>(10, 2, QMC::AccessPublic, QMetaType::Void),
     };
     QtMocHelpers::UintData qt_properties {
     };
@@ -89,7 +100,9 @@ void Shell::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void 
         case 0: _t->outputReady((*reinterpret_cast<std::add_pointer_t<QString>>(_a[1]))); break;
         case 1: _t->errorReady((*reinterpret_cast<std::add_pointer_t<QString>>(_a[1]))); break;
         case 2: _t->promptChanged((*reinterpret_cast<std::add_pointer_t<QString>>(_a[1]))); break;
-        case 3: _t->shellExited(); break;
+        case 3: _t->directoryChanged((*reinterpret_cast<std::add_pointer_t<QString>>(_a[1]))); break;
+        case 4: _t->openFileRequested((*reinterpret_cast<std::add_pointer_t<QString>>(_a[1]))); break;
+        case 5: _t->shellExited(); break;
         default: ;
         }
     }
@@ -100,7 +113,11 @@ void Shell::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void 
             return;
         if (QtMocHelpers::indexOfMethod<void (Shell::*)(const QString & )>(_a, &Shell::promptChanged, 2))
             return;
-        if (QtMocHelpers::indexOfMethod<void (Shell::*)()>(_a, &Shell::shellExited, 3))
+        if (QtMocHelpers::indexOfMethod<void (Shell::*)(const QString & )>(_a, &Shell::directoryChanged, 3))
+            return;
+        if (QtMocHelpers::indexOfMethod<void (Shell::*)(const QString & )>(_a, &Shell::openFileRequested, 4))
+            return;
+        if (QtMocHelpers::indexOfMethod<void (Shell::*)()>(_a, &Shell::shellExited, 5))
             return;
     }
 }
@@ -124,14 +141,14 @@ int Shell::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 4)
+        if (_id < 6)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 4;
+        _id -= 6;
     }
     if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 4)
+        if (_id < 6)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 4;
+        _id -= 6;
     }
     return _id;
 }
@@ -155,8 +172,20 @@ void Shell::promptChanged(const QString & _t1)
 }
 
 // SIGNAL 3
+void Shell::directoryChanged(const QString & _t1)
+{
+    QMetaObject::activate<void>(this, &staticMetaObject, 3, nullptr, _t1);
+}
+
+// SIGNAL 4
+void Shell::openFileRequested(const QString & _t1)
+{
+    QMetaObject::activate<void>(this, &staticMetaObject, 4, nullptr, _t1);
+}
+
+// SIGNAL 5
 void Shell::shellExited()
 {
-    QMetaObject::activate(this, &staticMetaObject, 3, nullptr);
+    QMetaObject::activate(this, &staticMetaObject, 5, nullptr);
 }
 QT_WARNING_POP

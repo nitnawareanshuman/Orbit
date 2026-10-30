@@ -5,3 +5,8 @@
 /Users/anshuman/Desktop/Orbit/build/apps/shell/CMakeFiles/rebuild_cache.dir
 /Users/anshuman/Desktop/Orbit/build/apps/shell/CMakeFiles/orbit-shell_autogen_timestamp_deps.dir
 /Users/anshuman/Desktop/Orbit/build/apps/shell/CMakeFiles/orbit-shell_autogen.dir
+/Users/anshuman/Desktop/Orbit/build/apps/filesystem/CMakeFiles/orbit-filesystem.dir
+/Users/anshuman/Desktop/Orbit/build/apps/filesystem/CMakeFiles/edit_cache.dir
+/Users/anshuman/Desktop/Orbit/build/apps/filesystem/CMakeFiles/rebuild_cache.dir
+/Users/anshuman/Desktop/Orbit/build/apps/filesystem/CMakeFiles/orbit-filesystem_autogen_timestamp_deps.dir
+/Users/anshuman/Desktop/Orbit/build/apps/filesystem/CMakeFiles/orbit-filesystem_autogen.dir
