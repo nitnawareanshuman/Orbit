@@ -1,0 +1,16 @@
+# ninja log v7
+2	772	1793362920604558818	apps/shell/orbit-shell_autogen/timestamp	1182fde56d07dc3f
+2	772	1793362920604558818	apps/shell/orbit-shell_autogen/mocs_compilation.cpp	1182fde56d07dc3f
+2	772	1793362920604558818	/Users/anshuman/Desktop/Orbit/build/apps/shell/orbit-shell_autogen/timestamp	1182fde56d07dc3f
+2	772	1793362920604558818	/Users/anshuman/Desktop/Orbit/build/apps/shell/orbit-shell_autogen/mocs_compilation.cpp	1182fde56d07dc3f
+776	1812	1793362920631275204	apps/shell/CMakeFiles/orbit-shell.dir/src/CommandParser.cpp.o	beb99480690d6908
+776	2256	1793362920631082794	apps/shell/CMakeFiles/orbit-shell.dir/src/main.cpp.o	9a44999ed3950dda
+776	2277	1793362920630761179	apps/shell/CMakeFiles/orbit-shell.dir/orbit-shell_autogen/mocs_compilation.cpp.o	6e52a79929264d0d
+777	2339	1793362920631631943	apps/shell/CMakeFiles/orbit-shell.dir/src/Shell.cpp.o	6734e70abf77dca9
+777	2452	1793362920632101178	apps/shell/CMakeFiles/orbit-shell.dir/src/TerminalWindow.cpp.o	b8e4cee7ea33d1b4
+15	58	1793363032081266258	apps/shell/orbit-shell_autogen/timestamp	1182fde56d07dc3f
+15	58	1793363032081266258	apps/shell/orbit-shell_autogen/mocs_compilation.cpp	1182fde56d07dc3f
+15	58	1793363032081266258	/Users/anshuman/Desktop/Orbit/build/apps/shell/orbit-shell_autogen/timestamp	1182fde56d07dc3f
+15	58	1793363032081266258	/Users/anshuman/Desktop/Orbit/build/apps/shell/orbit-shell_autogen/mocs_compilation.cpp	1182fde56d07dc3f
+58	1240	1793363032124817059	apps/shell/CMakeFiles/orbit-shell.dir/src/ProcessManager.cpp.o	19aefadb29bcafc
+1241	1372	1793363033306959860	apps/shell/orbit-shell	3ceb5943d812a71f
