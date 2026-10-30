@@ -3594,9 +3594,9 @@
  mdp:/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/stdint.h
  mdp:/Users/anshuman/Desktop/Orbit/apps/filesystem/include/FileManagerWidget.h
  mdp:/Users/anshuman/Desktop/Orbit/build/apps/filesystem/orbit-filesystem_autogen/moc_predefs.h
- mdp:/opt/homebrew/Cellar/qtbase/6.12.0/include/QtCore/QFileInfo
+ mdp:/opt/homebrew/Cellar/qtbase/6.12.0/include/QtCore/QFileSystemWatcher
+ mdp:/opt/homebrew/Cellar/qtbase/6.12.0/include/QtCore/QSortFilterProxyModel
  mdp:/opt/homebrew/Cellar/qtbase/6.12.0/include/QtGui/QFileSystemModel
- mdp:/opt/homebrew/Cellar/qtbase/6.12.0/include/QtGui/QIcon
  mdp:/opt/homebrew/Cellar/qtbase/6.12.0/include/QtWidgets/QWidget
  mdp:/opt/homebrew/Cellar/qtbase/6.12.0/lib/QtCore.framework/Versions/A/Headers/q17memory.h
  mdp:/opt/homebrew/Cellar/qtbase/6.12.0/lib/QtCore.framework/Versions/A/Headers/q20bit.h
@@ -3608,6 +3608,7 @@
  mdp:/opt/homebrew/Cellar/qtbase/6.12.0/lib/QtCore.framework/Versions/A/Headers/q23type_traits.h
  mdp:/opt/homebrew/Cellar/qtbase/6.12.0/lib/QtCore.framework/Versions/A/Headers/q23utility.h
  mdp:/opt/homebrew/Cellar/qtbase/6.12.0/lib/QtCore.framework/Versions/A/Headers/qabstractitemmodel.h
+ mdp:/opt/homebrew/Cellar/qtbase/6.12.0/lib/QtCore.framework/Versions/A/Headers/qabstractproxymodel.h
  mdp:/opt/homebrew/Cellar/qtbase/6.12.0/lib/QtCore.framework/Versions/A/Headers/qalgorithms.h
  mdp:/opt/homebrew/Cellar/qtbase/6.12.0/lib/QtCore.framework/Versions/A/Headers/qalloc.h
  mdp:/opt/homebrew/Cellar/qtbase/6.12.0/lib/QtCore.framework/Versions/A/Headers/qanystringview.h
@@ -3648,6 +3649,7 @@
  mdp:/opt/homebrew/Cellar/qtbase/6.12.0/lib/QtCore.framework/Versions/A/Headers/qfile.h
  mdp:/opt/homebrew/Cellar/qtbase/6.12.0/lib/QtCore.framework/Versions/A/Headers/qfiledevice.h
  mdp:/opt/homebrew/Cellar/qtbase/6.12.0/lib/QtCore.framework/Versions/A/Headers/qfileinfo.h
+ mdp:/opt/homebrew/Cellar/qtbase/6.12.0/lib/QtCore.framework/Versions/A/Headers/qfilesystemwatcher.h
  mdp:/opt/homebrew/Cellar/qtbase/6.12.0/lib/QtCore.framework/Versions/A/Headers/qflags.h
  mdp:/opt/homebrew/Cellar/qtbase/6.12.0/lib/QtCore.framework/Versions/A/Headers/qfloat16.h
  mdp:/opt/homebrew/Cellar/qtbase/6.12.0/lib/QtCore.framework/Versions/A/Headers/qforeach.h
@@ -3686,6 +3688,7 @@
  mdp:/opt/homebrew/Cellar/qtbase/6.12.0/lib/QtCore.framework/Versions/A/Headers/qprocessordetection.h
  mdp:/opt/homebrew/Cellar/qtbase/6.12.0/lib/QtCore.framework/Versions/A/Headers/qrect.h
  mdp:/opt/homebrew/Cellar/qtbase/6.12.0/lib/QtCore.framework/Versions/A/Headers/qrefcount.h
+ mdp:/opt/homebrew/Cellar/qtbase/6.12.0/lib/QtCore.framework/Versions/A/Headers/qregularexpression.h
  mdp:/opt/homebrew/Cellar/qtbase/6.12.0/lib/QtCore.framework/Versions/A/Headers/qscopedpointer.h
  mdp:/opt/homebrew/Cellar/qtbase/6.12.0/lib/QtCore.framework/Versions/A/Headers/qscopeguard.h
  mdp:/opt/homebrew/Cellar/qtbase/6.12.0/lib/QtCore.framework/Versions/A/Headers/qset.h
@@ -3694,6 +3697,7 @@
  mdp:/opt/homebrew/Cellar/qtbase/6.12.0/lib/QtCore.framework/Versions/A/Headers/qsharedpointer.h
  mdp:/opt/homebrew/Cellar/qtbase/6.12.0/lib/QtCore.framework/Versions/A/Headers/qsharedpointer_impl.h
  mdp:/opt/homebrew/Cellar/qtbase/6.12.0/lib/QtCore.framework/Versions/A/Headers/qsize.h
+ mdp:/opt/homebrew/Cellar/qtbase/6.12.0/lib/QtCore.framework/Versions/A/Headers/qsortfilterproxymodel.h
  mdp:/opt/homebrew/Cellar/qtbase/6.12.0/lib/QtCore.framework/Versions/A/Headers/qspan.h
  mdp:/opt/homebrew/Cellar/qtbase/6.12.0/lib/QtCore.framework/Versions/A/Headers/qstdlibdetection.h
  mdp:/opt/homebrew/Cellar/qtbase/6.12.0/lib/QtCore.framework/Versions/A/Headers/qstring.h

@@ -15,7 +15,8 @@ ProcessManager::ProcessManager(QObject *parent) : QObject(parent) {}
 
 bool ProcessManager::isRunning() const
 {
-    for (const ProcessJob &job : jobs) {
+    for (const ProcessJob &job : jobs)
+    {
         if (!job.finished && !job.background)
             return true;
     }
@@ -34,7 +35,8 @@ QString ProcessManager::stateName(const ProcessJob &job)
 QString ProcessManager::jobsText() const
 {
     QStringList lines;
-    for (auto it = jobs.cbegin(); it != jobs.cend(); ++it) {
+    for (auto it = jobs.cbegin(); it != jobs.cend(); ++it)
+    {
         lines << QString("[%1] %2  %3")
                      .arg(it.key())
                      .arg(stateName(it.value()))
@@ -48,7 +50,8 @@ void ProcessManager::execute(const Pipeline &pipeline, const QString &originalCo
     if (pipeline.isEmpty())
         return;
 
-    if (pipeline.commands.size() != 1) {
+    if (pipeline.commands.size() != 1)
+    {
         emit errorReady("orbit: pipelines are not implemented yet\n");
         return;
     }
@@ -62,9 +65,11 @@ void ProcessManager::execute(const Pipeline &pipeline, const QString &originalCo
     process->setProcessEnvironment(QProcessEnvironment::systemEnvironment());
     process->setProcessChannelMode(QProcess::SeparateChannels);
 
-    if (!command.inputFile.isEmpty()) {
+    if (!command.inputFile.isEmpty())
+    {
         QFileInfo input(command.inputFile);
-        if (!input.exists() || !input.isFile()) {
+        if (!input.exists() || !input.isFile())
+        {
             emit errorReady("orbit: input file not found: " + command.inputFile + '\n');
             process->deleteLater();
             return;
@@ -72,9 +77,11 @@ void ProcessManager::execute(const Pipeline &pipeline, const QString &originalCo
         process->setStandardInputFile(input.absoluteFilePath());
     }
 
-    if (!command.outputFile.isEmpty()) {
+    if (!command.outputFile.isEmpty())
+    {
         QFileInfo output(command.outputFile);
-        if (output.exists() && output.isDir()) {
+        if (output.exists() && output.isDir())
+        {
             emit errorReady("orbit: output is a directory: " + command.outputFile + '\n');
             process->deleteLater();
             return;
@@ -95,41 +102,39 @@ void ProcessManager::execute(const Pipeline &pipeline, const QString &originalCo
     if (!pipeline.background)
         foregroundJobId = id;
 
-    connect(process, &QProcess::readyReadStandardOutput, this, [this, process]() {
+    connect(process, &QProcess::readyReadStandardOutput, this, [this, process]()
+            {
         const QString data = QString::fromLocal8Bit(process->readAllStandardOutput());
         if (!data.isEmpty())
-            emit outputReady(data);
-    });
+            emit outputReady(data); });
 
-    connect(process, &QProcess::readyReadStandardError, this, [this, process]() {
+    connect(process, &QProcess::readyReadStandardError, this, [this, process]()
+            {
         const QString data = QString::fromLocal8Bit(process->readAllStandardError());
         if (!data.isEmpty())
-            emit errorReady(data);
-    });
+            emit errorReady(data); });
 
-    connect(process, &QProcess::started, this, [this, process, id]() {
+    connect(process, &QProcess::started, this, [this, process, id]()
+            {
         emit processStarted(static_cast<qint64>(process->processId()));
         emit jobChanged();
 
         if (jobs.value(id).background)
-            emit outputReady(QString("[%1] %2\n").arg(id).arg(process->processId()));
-    });
+            emit outputReady(QString("[%1] %2\n").arg(id).arg(process->processId())); });
 
     connect(process, qOverload<int, QProcess::ExitStatus>(&QProcess::finished),
-            this, [this, id](int code, QProcess::ExitStatus status) {
-        finishJob(id, code, status);
-    });
+            this, [this, id](int code, QProcess::ExitStatus status)
+            { finishJob(id, code, status); });
 
     connect(process, &QProcess::errorOccurred, this,
-            [this, process, id](QProcess::ProcessError error) {
-        if (error != QProcess::FailedToStart)
-            return;
+            [this, process, id](QProcess::ProcessError error)
+            {
+                if (error != QProcess::FailedToStart)
+                    return;
 
-        // A missing executable is a single concise error, not a verbose
-        // QProcess diagnostic followed by a second "exit status 127" error.
-        emit errorReady("orbit: command not found: " + process->program() + '\n');
-        finishJob(id, 127, QProcess::NormalExit, false);
-    });
+                emit errorReady("orbit: command not found: " + process->program() + '\n');
+                finishJob(id, 127, QProcess::NormalExit, false);
+            });
 
     process->start();
     emit jobChanged();
@@ -143,24 +148,47 @@ void ProcessManager::finishJob(int jobId, int exitCode,
     if (it == jobs.end() || it->finished)
         return;
 
+    // Drain any bytes that arrived just before QProcess emitted finished.
+    if (it->process)
+    {
+        const QString remainingOutput =
+            QString::fromLocal8Bit(it->process->readAllStandardOutput());
+        const QString remainingError =
+            QString::fromLocal8Bit(it->process->readAllStandardError());
+        if (!remainingOutput.isEmpty())
+            emit outputReady(remainingOutput);
+        if (!remainingError.isEmpty())
+            emit errorReady(remainingError);
+    }
+
     it->finished = true;
     it->exitCode = exitCode;
 
-    if (reportExitError) {
-        if (status == QProcess::CrashExit) {
+    if (reportExitError)
+    {
+        if (status == QProcess::CrashExit)
+        {
             emit errorReady(QString("orbit: job %1 terminated by a signal\n").arg(jobId));
-        } else if (exitCode != 0) {
+        }
+        else if (exitCode != 0)
+        {
             emit errorReady(QString("orbit: job %1 exited with status %2\n")
-                                .arg(jobId).arg(exitCode));
+                                .arg(jobId)
+                                .arg(exitCode));
         }
     }
 
-    if (foregroundJobId == jobId) {
+    if (foregroundJobId == jobId)
+    {
         foregroundJobId = 0;
         emit processFinished(exitCode);
-    } else if (reportExitError) {
+    }
+    else if (reportExitError)
+    {
         emit outputReady(QString("[%1] Done (%2) %3\n")
-                             .arg(jobId).arg(exitCode).arg(it->command));
+                             .arg(jobId)
+                             .arg(exitCode)
+                             .arg(it->command));
     }
 
     emit jobChanged();
@@ -213,8 +241,10 @@ bool ProcessManager::signalJob(int jobId, int signalNumber)
 
 void ProcessManager::terminate()
 {
-    for (ProcessJob &job : jobs) {
-        if (!job.finished && job.process) {
+    for (ProcessJob &job : jobs)
+    {
+        if (!job.finished && job.process)
+        {
             job.process->terminate();
             if (!job.process->waitForFinished(1500))
                 job.process->kill();

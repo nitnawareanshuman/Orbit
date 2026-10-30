@@ -1097,9 +1097,9 @@
   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/stdbool.h \
   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/stddef.h \
   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/stdint.h \
-  /opt/homebrew/Cellar/qtbase/6.12.0/include/QtCore/QFileInfo \
+  /opt/homebrew/Cellar/qtbase/6.12.0/include/QtCore/QFileSystemWatcher \
+  /opt/homebrew/Cellar/qtbase/6.12.0/include/QtCore/QSortFilterProxyModel \
   /opt/homebrew/Cellar/qtbase/6.12.0/include/QtGui/QFileSystemModel \
-  /opt/homebrew/Cellar/qtbase/6.12.0/include/QtGui/QIcon \
   /opt/homebrew/Cellar/qtbase/6.12.0/include/QtWidgets/QWidget \
   /opt/homebrew/Cellar/qtbase/6.12.0/lib/QtCore.framework/Versions/A/Headers/q17memory.h \
   /opt/homebrew/Cellar/qtbase/6.12.0/lib/QtCore.framework/Versions/A/Headers/q20bit.h \
@@ -1111,6 +1111,7 @@
   /opt/homebrew/Cellar/qtbase/6.12.0/lib/QtCore.framework/Versions/A/Headers/q23type_traits.h \
   /opt/homebrew/Cellar/qtbase/6.12.0/lib/QtCore.framework/Versions/A/Headers/q23utility.h \
   /opt/homebrew/Cellar/qtbase/6.12.0/lib/QtCore.framework/Versions/A/Headers/qabstractitemmodel.h \
+  /opt/homebrew/Cellar/qtbase/6.12.0/lib/QtCore.framework/Versions/A/Headers/qabstractproxymodel.h \
   /opt/homebrew/Cellar/qtbase/6.12.0/lib/QtCore.framework/Versions/A/Headers/qalgorithms.h \
   /opt/homebrew/Cellar/qtbase/6.12.0/lib/QtCore.framework/Versions/A/Headers/qalloc.h \
   /opt/homebrew/Cellar/qtbase/6.12.0/lib/QtCore.framework/Versions/A/Headers/qanystringview.h \
@@ -1151,6 +1152,7 @@
   /opt/homebrew/Cellar/qtbase/6.12.0/lib/QtCore.framework/Versions/A/Headers/qfile.h \
   /opt/homebrew/Cellar/qtbase/6.12.0/lib/QtCore.framework/Versions/A/Headers/qfiledevice.h \
   /opt/homebrew/Cellar/qtbase/6.12.0/lib/QtCore.framework/Versions/A/Headers/qfileinfo.h \
+  /opt/homebrew/Cellar/qtbase/6.12.0/lib/QtCore.framework/Versions/A/Headers/qfilesystemwatcher.h \
   /opt/homebrew/Cellar/qtbase/6.12.0/lib/QtCore.framework/Versions/A/Headers/qflags.h \
   /opt/homebrew/Cellar/qtbase/6.12.0/lib/QtCore.framework/Versions/A/Headers/qfloat16.h \
   /opt/homebrew/Cellar/qtbase/6.12.0/lib/QtCore.framework/Versions/A/Headers/qforeach.h \
@@ -1189,6 +1191,7 @@
   /opt/homebrew/Cellar/qtbase/6.12.0/lib/QtCore.framework/Versions/A/Headers/qprocessordetection.h \
   /opt/homebrew/Cellar/qtbase/6.12.0/lib/QtCore.framework/Versions/A/Headers/qrect.h \
   /opt/homebrew/Cellar/qtbase/6.12.0/lib/QtCore.framework/Versions/A/Headers/qrefcount.h \
+  /opt/homebrew/Cellar/qtbase/6.12.0/lib/QtCore.framework/Versions/A/Headers/qregularexpression.h \
   /opt/homebrew/Cellar/qtbase/6.12.0/lib/QtCore.framework/Versions/A/Headers/qscopedpointer.h \
   /opt/homebrew/Cellar/qtbase/6.12.0/lib/QtCore.framework/Versions/A/Headers/qscopeguard.h \
   /opt/homebrew/Cellar/qtbase/6.12.0/lib/QtCore.framework/Versions/A/Headers/qset.h \
@@ -1197,6 +1200,7 @@
   /opt/homebrew/Cellar/qtbase/6.12.0/lib/QtCore.framework/Versions/A/Headers/qsharedpointer.h \
   /opt/homebrew/Cellar/qtbase/6.12.0/lib/QtCore.framework/Versions/A/Headers/qsharedpointer_impl.h \
   /opt/homebrew/Cellar/qtbase/6.12.0/lib/QtCore.framework/Versions/A/Headers/qsize.h \
+  /opt/homebrew/Cellar/qtbase/6.12.0/lib/QtCore.framework/Versions/A/Headers/qsortfilterproxymodel.h \
   /opt/homebrew/Cellar/qtbase/6.12.0/lib/QtCore.framework/Versions/A/Headers/qspan.h \
   /opt/homebrew/Cellar/qtbase/6.12.0/lib/QtCore.framework/Versions/A/Headers/qstdlibdetection.h \
   /opt/homebrew/Cellar/qtbase/6.12.0/lib/QtCore.framework/Versions/A/Headers/qstring.h \

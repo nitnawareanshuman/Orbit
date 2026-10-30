@@ -15,6 +15,12 @@ Shell::Shell(QObject *parent) : QObject(parent), processManager(this)
             this, &Shell::outputReady);
     connect(&processManager, &ProcessManager::errorReady,
             this, &Shell::errorReady);
+
+    // Restore the interactive prompt after every foreground external command
+    // (for example touch, ls, git, cmake) has finished.
+    connect(&processManager, &ProcessManager::processFinished,
+            this, [this](int)
+            { emit promptChanged(currentDirectory()); });
 }
 
 QString Shell::currentDirectory() const
@@ -95,45 +101,63 @@ void Shell::executeBuiltin(const Command &command)
             emit errorReady("orbit: mkdir: missing operand\n");
             return;
         }
+
         bool makeParents = false;
         QStringList paths;
-        for (const QString &arg : args) {
+        for (const QString &arg : args)
+        {
             if (arg == "-p" || arg == "--parents")
                 makeParents = true;
-            else if (arg.startsWith('-')) {
+            else if (arg.startsWith('-'))
+            {
                 emit errorReady("orbit: mkdir: unsupported option: " + arg + '\n');
                 return;
-            } else
+            }
+            else
                 paths << arg;
         }
-        if (paths.isEmpty()) {
+
+        if (paths.isEmpty())
+        {
             emit errorReady("orbit: mkdir: missing operand\n");
             return;
         }
-        bool failed = false;
-        for (const QString &path : paths) {
+
+        QStringList created;
+        QStringList failed;
+        for (const QString &path : paths)
+        {
             QDir dir;
             const bool ok = makeParents ? dir.mkpath(path) : dir.mkdir(path);
-            if (!ok) {
-                emit errorReady("orbit: mkdir: cannot create directory '" + path + "'\n");
-                failed = true;
-            }
+            if (ok)
+                created << QFileInfo(path).absoluteFilePath();
+            else
+                failed << path;
         }
-        if (!failed)
-            emit outputReady(QString());
-        emit directoryChanged(currentDirectory());
+
+        for (const QString &path : failed)
+            emit errorReady("orbit: mkdir: cannot create directory '" + path + "'\n");
+
+        if (!created.isEmpty())
+        {
+            emit outputReady("Created directory" + QString(created.size() == 1 ? ": " : "ies: ") + created.join(", ") + '\n');
+            emit directoryChanged(currentDirectory());
+        }
         return;
     }
 
     if (name == "cat")
     {
-        if (args.isEmpty()) {
+        if (args.isEmpty())
+        {
             emit errorReady("orbit: cat: missing file operand\n");
             return;
         }
-        for (const QString &path : args) {
+        for (const QString &path : args)
+        {
             QFileInfo info(path);
-            if (!info.exists() || !info.isFile()) {
+            if (!info.exists() || !info.isFile())
+            {
                 emit errorReady("orbit: cat: " + path + ": no such file\n");
                 continue;
             }
@@ -200,10 +224,14 @@ void Shell::executeBuiltin(const Command &command)
             if (args.size() > 1 && args.first().startsWith('-'))
             {
                 const QString signalName = args.first().mid(1).toUpper();
-                if (signalName == "KILL") signalNumber = SIGKILL;
-                else if (signalName == "INT") signalNumber = SIGINT;
-                else if (signalName == "STOP") signalNumber = SIGSTOP;
-                else if (signalName == "CONT") signalNumber = SIGCONT;
+                if (signalName == "KILL")
+                    signalNumber = SIGKILL;
+                else if (signalName == "INT")
+                    signalNumber = SIGINT;
+                else if (signalName == "STOP")
+                    signalNumber = SIGSTOP;
+                else if (signalName == "CONT")
+                    signalNumber = SIGCONT;
             }
             success = processManager.signalJob(id, signalNumber);
 #else

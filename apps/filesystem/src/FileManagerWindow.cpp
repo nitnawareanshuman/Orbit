@@ -16,7 +16,7 @@ FileManagerWindow::FileManagerWindow(QWidget *parent) : QMainWindow(parent)
     statusBar()->showMessage(QDir::homePath());
 
     connect(fileManager, &FileManagerWidget::fileOpenRequested,
-            this, [this](const QString &path) {
+            this, [](const QString &path) {
         auto *editor = new TextEditorWindow(path);
         editor->setAttribute(Qt::WA_DeleteOnClose);
         editor->show();

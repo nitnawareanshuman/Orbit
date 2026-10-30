@@ -1246,7 +1246,8 @@
  mdp:/opt/homebrew/Cellar/qtbase/6.12.0/lib/QtWidgets.framework/Versions/A/Headers/qwidget.h
 /Users/anshuman/Desktop/Orbit/apps/shell/src/TextEditorWindow.cpp
 /Users/anshuman/Desktop/Orbit/apps/shell/src/FileManagerWidget.cpp
-/Users/anshuman/Desktop/Orbit/apps/shell/src/ProcessManager.cpp
+/Users/anshuman/Desktop/Orbit/apps/shell/src/TerminalWindow.cpp
+/Users/anshuman/Desktop/Orbit/apps/shell/src/main.cpp
 /Users/anshuman/Desktop/Orbit/apps/shell/include/TerminalWindow.h
  mmc:Q_OBJECT
  mdp:/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/Availability.h
@@ -2547,8 +2548,7 @@
  mdp:/opt/homebrew/Cellar/qtbase/6.12.0/lib/QtWidgets.framework/Versions/A/Headers/qtwidgetsexports.h
  mdp:/opt/homebrew/Cellar/qtbase/6.12.0/lib/QtWidgets.framework/Versions/A/Headers/qtwidgetsglobal.h
  mdp:/opt/homebrew/Cellar/qtbase/6.12.0/lib/QtWidgets.framework/Versions/A/Headers/qwidget.h
-/Users/anshuman/Desktop/Orbit/apps/shell/src/main.cpp
-/Users/anshuman/Desktop/Orbit/apps/shell/src/TerminalWindow.cpp
+/Users/anshuman/Desktop/Orbit/apps/shell/src/ProcessManager.cpp
 /Users/anshuman/Desktop/Orbit/apps/shell/include/Command.h
 /Users/anshuman/Desktop/Orbit/apps/shell/include/FileManagerWidget.h
  mmc:Q_OBJECT

@@ -1,5 +1,5 @@
-
 #include "TerminalWindow.h"
+#include "TextEditorWindow.h"
 
 #include <QKeyEvent>
 #include <QTextCursor>
@@ -16,7 +16,6 @@
 
 namespace
 {
-
     QTextCharFormat normalFormat()
     {
         QTextCharFormat f;
@@ -30,7 +29,6 @@ namespace
         f.setForeground(QColor("#FF5C65"));
         return f;
     }
-
 }
 
 TerminalWidget::TerminalWidget(QWidget *parent)
@@ -64,15 +62,8 @@ TerminalWidget::TerminalWidget(QWidget *parent)
         "python3", "g++", "clang++"};
 }
 
-void TerminalWidget::setPrompt(const QString &p)
-{
-    prompt = p;
-}
-
-void TerminalWidget::setCommandCompletions(const QStringList &c)
-{
-    completions = c;
-}
+void TerminalWidget::setPrompt(const QString &p) { prompt = p; }
+void TerminalWidget::setCommandCompletions(const QStringList &c) { completions = c; }
 
 void TerminalWidget::moveCursorToEnd()
 {
@@ -107,7 +98,6 @@ void TerminalWidget::removePrompt()
     c.setPosition(inputStart);
     c.movePosition(QTextCursor::End, QTextCursor::KeepAnchor);
     c.removeSelectedText();
-
     promptVisible = false;
 }
 
@@ -121,15 +111,11 @@ void TerminalWidget::showPrompt()
 
     if (c.position() > 0 &&
         document()->characterAt(c.position() - 1) != QChar('\n'))
-    {
         c.insertText("\n", normalFormat());
-    }
 
     c.insertText(prompt + " ", normalFormat());
-
     inputStart = c.position();
     promptVisible = true;
-
     setTextCursor(c);
     verticalScrollBar()->setValue(verticalScrollBar()->maximum());
 }
@@ -141,13 +127,11 @@ void TerminalWidget::appendOutput(const QString &t)
 
     const bool had = promptVisible;
     const QString pending = had ? currentInput() : QString();
-
     removePrompt();
 
     QTextCursor c(document());
     c.movePosition(QTextCursor::End);
     c.insertText(t, normalFormat());
-
     if (!t.endsWith('\n'))
         c.insertText("\n", normalFormat());
 
@@ -169,13 +153,11 @@ void TerminalWidget::appendError(const QString &t)
 
     const bool had = promptVisible;
     const QString pending = had ? currentInput() : QString();
-
     removePrompt();
 
     QTextCursor c(document());
     c.movePosition(QTextCursor::End);
     c.insertText(t, errorFormat());
-
     if (!t.endsWith('\n'))
         c.insertText("\n", errorFormat());
 
@@ -195,10 +177,8 @@ void TerminalWidget::startSession(const QString &w, const QString &p)
     clear();
     prompt = p;
     promptVisible = false;
-
     QTextCursor c(document());
     c.insertText(w + "\n", normalFormat());
-
     showPrompt();
 }
 
@@ -211,87 +191,62 @@ void TerminalWidget::navigateHistory(int d)
     {
         if (historyIndex == history.size())
             savedInput = currentInput();
-
         historyIndex = std::max(0, historyIndex - 1);
     }
     else
     {
-        historyIndex = std::min(
-            static_cast<int>(history.size()),
-            historyIndex + 1);
+        historyIndex = std::min(static_cast<int>(history.size()), historyIndex + 1);
     }
 
-    replaceCurrentInput(
-        historyIndex == history.size()
-            ? savedInput
-            : history.at(historyIndex));
-
+    replaceCurrentInput(historyIndex == history.size() ? savedInput : history.at(historyIndex));
     moveCursorToEnd();
 }
 
 void TerminalWidget::autocomplete()
 {
     QTextCursor c = textCursor();
-
     if (c.position() < inputStart)
         return;
 
     QString input = currentInput();
-
     int pos = c.position() - inputStart;
     int start = pos;
     int end = pos;
 
     while (start > 0 && !input[start - 1].isSpace())
         --start;
-
     while (end < input.size() && !input[end].isSpace())
         ++end;
 
     const QString token = input.mid(start, pos - start);
-
     if (token.isEmpty())
         return;
 
     QStringList matches;
-
     const int slash = token.lastIndexOf('/');
-    const QString dirPart =
-        slash >= 0 ? token.left(slash + 1) : QString();
-
-    const QString prefix =
-        slash >= 0 ? token.mid(slash + 1) : token;
-
+    const QString dirPart = slash >= 0 ? token.left(slash + 1) : QString();
+    const QString prefix = slash >= 0 ? token.mid(slash + 1) : token;
     QDir dir(dirPart.isEmpty() ? QDir::currentPath() : dirPart);
 
     if (dir.exists())
     {
-        for (const QFileInfo &entry :
-             dir.entryInfoList(
-                 QDir::AllEntries | QDir::NoDotAndDotDot,
-                 QDir::Name))
+        for (const QFileInfo &entry : dir.entryInfoList(
+                 QDir::AllEntries | QDir::NoDotAndDotDot, QDir::Name))
         {
-
-            if (entry.fileName().startsWith(
-                    prefix, Qt::CaseInsensitive))
-            {
+            if (entry.fileName().startsWith(prefix, Qt::CaseInsensitive))
                 matches << dirPart + entry.fileName() + (entry.isDir() ? "/" : "");
-            }
         }
     }
 
     if (matches.isEmpty() && slash < 0)
     {
         for (const QString &item : completions)
-        {
             if (item.startsWith(token, Qt::CaseInsensitive))
                 matches << item;
-        }
     }
 
     matches.removeDuplicates();
     matches.sort(Qt::CaseInsensitive);
-
     if (matches.isEmpty())
         return;
 
@@ -302,7 +257,6 @@ void TerminalWidget::autocomplete()
     }
 
     const QString replacement = matches.first();
-
     input.replace(start, end - start, replacement);
     replaceCurrentInput(input);
 
@@ -327,25 +281,18 @@ void TerminalWidget::submitCommand()
         return;
 
     const QString command = currentInput().trimmed();
-
     QTextCursor c(document());
     c.movePosition(QTextCursor::End);
     c.insertText("\n", normalFormat());
-
     inputStart = c.position();
     promptVisible = false;
 
     historyIndex = history.size();
-
-    if (!command.isEmpty() &&
-        (history.isEmpty() || history.last() != command))
-    {
+    if (!command.isEmpty() && (history.isEmpty() || history.last() != command))
         history.append(command);
-    }
 
     completionIndex = -1;
     savedInput.clear();
-
     emit commandEntered(command);
 }
 
@@ -359,24 +306,19 @@ void TerminalWidget::keyPressEvent(QKeyEvent *event)
     case Qt::Key_Enter:
         submitCommand();
         return;
-
     case Qt::Key_Up:
         navigateHistory(-1);
         return;
-
     case Qt::Key_Down:
         navigateHistory(1);
         return;
-
     case Qt::Key_Tab:
         autocomplete();
         return;
-
     case Qt::Key_Backspace:
         if (textCursor().position() <= inputStart)
             return;
         break;
-
     case Qt::Key_Home:
     {
         QTextCursor c = textCursor();
@@ -384,7 +326,6 @@ void TerminalWidget::keyPressEvent(QKeyEvent *event)
         setTextCursor(c);
         return;
     }
-
     default:
         break;
     }
@@ -393,7 +334,6 @@ void TerminalWidget::keyPressEvent(QKeyEvent *event)
         moveCursorToEnd();
 
     completionIndex = -1;
-
     QPlainTextEdit::keyPressEvent(event);
 }
 
@@ -402,43 +342,34 @@ TerminalWindow::TerminalWindow(QWidget *parent)
 {
     setupUI();
 
-    connect(
-        terminal,
-        &TerminalWidget::commandEntered,
-        this,
-        &TerminalWindow::executeCommand);
+    connect(terminal, &TerminalWidget::commandEntered,
+            this, &TerminalWindow::executeCommand);
+    connect(&shell, &Shell::outputReady,
+            terminal, &TerminalWidget::appendOutput);
+    connect(&shell, &Shell::errorReady,
+            terminal, &TerminalWidget::appendError);
 
-    connect(
-        &shell,
-        &Shell::outputReady,
-        terminal,
-        &TerminalWidget::appendOutput);
+    connect(&shell, &Shell::promptChanged,
+            this, [this](const QString &d)
+            {
+                terminal->setPrompt(QString("orbit:%1 $").arg(d));
+                terminal->showPrompt(); });
 
-    connect(
-        &shell,
-        &Shell::errorReady,
-        terminal,
-        &TerminalWidget::appendError);
+    // cat is a Shell builtin that emits this signal with an absolute file path.
+    // Open the same editor component used by Orbit Files in a standalone window.
+    connect(&shell, &Shell::openFileRequested,
+            this, [](const QString &path)
+            {
+                auto *editor = new TextEditorWindow(path);
+                editor->setAttribute(Qt::WA_DeleteOnClose);
+                editor->show();
+                editor->raise();
+                editor->activateWindow(); });
 
-    connect(
-        &shell,
-        &Shell::promptChanged,
-        this,
-        [this](const QString &d)
-        {
-            terminal->setPrompt(QString("orbit:%1 $").arg(d));
-            terminal->showPrompt();
-        });
-
-    connect(
-        &shell,
-        &Shell::shellExited,
-        this,
-        [this]
-        {
-            terminal->removePrompt();
-            terminal->setDisabled(true);
-        });
+    connect(&shell, &Shell::shellExited, this, [this]
+            {
+        terminal->removePrompt();
+        terminal->setDisabled(true); });
 
     terminal->startSession(
         "Orbit Shell v0.2.0 — ready. Type a command to begin.",
@@ -449,21 +380,15 @@ void TerminalWindow::setupUI()
 {
     setWindowTitle("Orbit — Terminal");
     resize(1320, 780);
-
     terminal = new TerminalWidget(this);
-
     setCentralWidget(terminal);
-
-    setStyleSheet(
-        "QMainWindow { background: #20232D; }");
-
+    setStyleSheet("QMainWindow { background: #20232D; }");
     terminal->setFocus();
 }
 
 void TerminalWindow::executeCommand(const QString &command)
 {
     const QString cleaned = command.trimmed();
-
     if (cleaned.isEmpty())
         return;
 
