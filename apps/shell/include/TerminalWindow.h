@@ -1,13 +1,49 @@
+
 #pragma once
 
 #include "Shell.h"
 
 #include <QMainWindow>
+#include <QPlainTextEdit>
+#include <QStringList>
 
-class QPlainTextEdit;
-class QLineEdit;
-class QLabel;
-class QPushButton;
+class TerminalWidget : public QPlainTextEdit
+{
+    Q_OBJECT
+
+public:
+    explicit TerminalWidget(QWidget *parent = nullptr);
+
+    void appendOutput(const QString &text);
+    void setPrompt(const QString &prompt);
+    void setCommandCompletions(const QStringList &commands);
+
+signals:
+    void commandEntered(const QString &command);
+
+protected:
+    void keyPressEvent(QKeyEvent *event) override;
+
+private:
+    QString prompt;
+    QStringList history;
+    QStringList completions;
+
+    int historyIndex = 0;
+    int inputStart = 0;
+    int completionIndex = -1;
+
+    QString savedInput;
+
+    QString currentInput() const;
+    void replaceCurrentInput(const QString &text);
+    void navigateHistory(int direction);
+    void autocomplete();
+    void submitCommand();
+
+    void moveCursorToEnd();
+    void protectPreviousOutput();
+};
 
 class TerminalWindow : public QMainWindow
 {
@@ -18,13 +54,8 @@ public:
 
 private:
     Shell shell;
-
-    QPlainTextEdit *terminalOutput;
-    QLineEdit *commandInput;
-    QLabel *promptLabel;
-    QPushButton *stopButton;
+    TerminalWidget *terminal = nullptr;
 
     void setupUI();
-    void executeCommand();
-    void appendOutput(const QString &text);
+    void executeCommand(const QString &command);
 };
