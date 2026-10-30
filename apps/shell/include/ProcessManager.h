@@ -4,32 +4,45 @@
 
 #include <QObject>
 #include <QProcess>
+#include <QHash>
 #include <QVector>
+
+struct ProcessJob
+{
+    int id = 0;
+    QString command;
+    QProcess *process = nullptr;
+    bool background = false;
+    bool finished = false;
+    int exitCode = -1;
+};
 
 class ProcessManager : public QObject
 {
     Q_OBJECT
-
 public:
     explicit ProcessManager(QObject *parent = nullptr);
 
     bool isRunning() const;
-
-    void execute(const Pipeline &pipeline);
-
+    void execute(const Pipeline &pipeline, const QString &originalCommand = {});
+    QString jobsText() const;
+    bool foreground(int jobId);
+    bool background(int jobId);
+    bool signalJob(int jobId, int signalNumber);
     void terminate();
 
 signals:
     void outputReady(const QString &text);
     void errorReady(const QString &text);
-
     void processStarted(qint64 pid);
     void processFinished(int exitCode);
+    void jobChanged();
 
 private:
-    QVector<QProcess *> processes;
+    QHash<int, ProcessJob> jobs;
+    int nextJobId = 1;
+    int foregroundJobId = 0;
 
-    bool running = false;
-
-    void cleanup();
+    void finishJob(int jobId, int exitCode, QProcess::ExitStatus status);
+    static QString stateName(const ProcessJob &job);
 };

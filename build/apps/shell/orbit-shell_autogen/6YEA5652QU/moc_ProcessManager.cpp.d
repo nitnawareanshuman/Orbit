@@ -1078,6 +1078,7 @@
   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/stddef.h \
   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/stdint.h \
   /Users/anshuman/Desktop/Orbit/apps/shell/include/Command.h \
+  /opt/homebrew/Cellar/qtbase/6.12.0/include/QtCore/QHash \
   /opt/homebrew/Cellar/qtbase/6.12.0/include/QtCore/QObject \
   /opt/homebrew/Cellar/qtbase/6.12.0/include/QtCore/QProcess \
   /opt/homebrew/Cellar/qtbase/6.12.0/include/QtCore/QString \
@@ -1126,6 +1127,7 @@
   /opt/homebrew/Cellar/qtbase/6.12.0/lib/QtCore.framework/Versions/A/Headers/qgenericatomic.h \
   /opt/homebrew/Cellar/qtbase/6.12.0/lib/QtCore.framework/Versions/A/Headers/qglobal.h \
   /opt/homebrew/Cellar/qtbase/6.12.0/lib/QtCore.framework/Versions/A/Headers/qglobalstatic.h \
+  /opt/homebrew/Cellar/qtbase/6.12.0/lib/QtCore.framework/Versions/A/Headers/qhash.h \
   /opt/homebrew/Cellar/qtbase/6.12.0/lib/QtCore.framework/Versions/A/Headers/qhashfunctions.h \
   /opt/homebrew/Cellar/qtbase/6.12.0/lib/QtCore.framework/Versions/A/Headers/qiodevice.h \
   /opt/homebrew/Cellar/qtbase/6.12.0/lib/QtCore.framework/Versions/A/Headers/qiodevicebase.h \

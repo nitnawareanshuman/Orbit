@@ -1088,10 +1088,12 @@
  mdp:/Users/anshuman/Desktop/Orbit/apps/shell/include/Shell.h
  mdp:/Users/anshuman/Desktop/Orbit/apps/shell/include/TerminalWindow.h
  mdp:/Users/anshuman/Desktop/Orbit/build/apps/shell/orbit-shell_autogen/moc_predefs.h
+ mdp:/opt/homebrew/Cellar/qtbase/6.12.0/include/QtCore/QHash
  mdp:/opt/homebrew/Cellar/qtbase/6.12.0/include/QtCore/QObject
  mdp:/opt/homebrew/Cellar/qtbase/6.12.0/include/QtCore/QProcess
  mdp:/opt/homebrew/Cellar/qtbase/6.12.0/include/QtCore/QString
  mdp:/opt/homebrew/Cellar/qtbase/6.12.0/include/QtCore/QStringList
+ mdp:/opt/homebrew/Cellar/qtbase/6.12.0/include/QtCore/QVector
  mdp:/opt/homebrew/Cellar/qtbase/6.12.0/include/QtWidgets/QMainWindow
  mdp:/opt/homebrew/Cellar/qtbase/6.12.0/include/QtWidgets/QPlainTextEdit
  mdp:/opt/homebrew/Cellar/qtbase/6.12.0/lib/QtCore.framework/Versions/A/Headers/QList
@@ -1237,6 +1239,7 @@
  mdp:/opt/homebrew/Cellar/qtbase/6.12.0/lib/QtCore.framework/Versions/A/Headers/qutf8stringview.h
  mdp:/opt/homebrew/Cellar/qtbase/6.12.0/lib/QtCore.framework/Versions/A/Headers/qvariant.h
  mdp:/opt/homebrew/Cellar/qtbase/6.12.0/lib/QtCore.framework/Versions/A/Headers/qvarlengtharray.h
+ mdp:/opt/homebrew/Cellar/qtbase/6.12.0/lib/QtCore.framework/Versions/A/Headers/qvector.h
  mdp:/opt/homebrew/Cellar/qtbase/6.12.0/lib/QtCore.framework/Versions/A/Headers/qversiontagging.h
  mdp:/opt/homebrew/Cellar/qtbase/6.12.0/lib/QtCore.framework/Versions/A/Headers/qxptype_traits.h
  mdp:/opt/homebrew/Cellar/qtbase/6.12.0/lib/QtCore.framework/Versions/A/Headers/qyieldcpu.h
@@ -2384,10 +2387,12 @@
  mdp:/Users/anshuman/Desktop/Orbit/apps/shell/include/ProcessManager.h
  mdp:/Users/anshuman/Desktop/Orbit/apps/shell/include/Shell.h
  mdp:/Users/anshuman/Desktop/Orbit/build/apps/shell/orbit-shell_autogen/moc_predefs.h
+ mdp:/opt/homebrew/Cellar/qtbase/6.12.0/include/QtCore/QHash
  mdp:/opt/homebrew/Cellar/qtbase/6.12.0/include/QtCore/QObject
  mdp:/opt/homebrew/Cellar/qtbase/6.12.0/include/QtCore/QProcess
  mdp:/opt/homebrew/Cellar/qtbase/6.12.0/include/QtCore/QString
  mdp:/opt/homebrew/Cellar/qtbase/6.12.0/include/QtCore/QStringList
+ mdp:/opt/homebrew/Cellar/qtbase/6.12.0/include/QtCore/QVector
  mdp:/opt/homebrew/Cellar/qtbase/6.12.0/lib/QtCore.framework/Versions/A/Headers/q17memory.h
  mdp:/opt/homebrew/Cellar/qtbase/6.12.0/lib/QtCore.framework/Versions/A/Headers/q20bit.h
  mdp:/opt/homebrew/Cellar/qtbase/6.12.0/lib/QtCore.framework/Versions/A/Headers/q20functional.h
@@ -2431,6 +2436,7 @@
  mdp:/opt/homebrew/Cellar/qtbase/6.12.0/lib/QtCore.framework/Versions/A/Headers/qgenericatomic.h
  mdp:/opt/homebrew/Cellar/qtbase/6.12.0/lib/QtCore.framework/Versions/A/Headers/qglobal.h
  mdp:/opt/homebrew/Cellar/qtbase/6.12.0/lib/QtCore.framework/Versions/A/Headers/qglobalstatic.h
+ mdp:/opt/homebrew/Cellar/qtbase/6.12.0/lib/QtCore.framework/Versions/A/Headers/qhash.h
  mdp:/opt/homebrew/Cellar/qtbase/6.12.0/lib/QtCore.framework/Versions/A/Headers/qhashfunctions.h
  mdp:/opt/homebrew/Cellar/qtbase/6.12.0/lib/QtCore.framework/Versions/A/Headers/qiodevice.h
  mdp:/opt/homebrew/Cellar/qtbase/6.12.0/lib/QtCore.framework/Versions/A/Headers/qiodevicebase.h
@@ -2495,6 +2501,7 @@
  mdp:/opt/homebrew/Cellar/qtbase/6.12.0/lib/QtCore.framework/Versions/A/Headers/qtypeinfo.h
  mdp:/opt/homebrew/Cellar/qtbase/6.12.0/lib/QtCore.framework/Versions/A/Headers/qtypes.h
  mdp:/opt/homebrew/Cellar/qtbase/6.12.0/lib/QtCore.framework/Versions/A/Headers/qutf8stringview.h
+ mdp:/opt/homebrew/Cellar/qtbase/6.12.0/lib/QtCore.framework/Versions/A/Headers/qvector.h
  mdp:/opt/homebrew/Cellar/qtbase/6.12.0/lib/QtCore.framework/Versions/A/Headers/qversiontagging.h
  mdp:/opt/homebrew/Cellar/qtbase/6.12.0/lib/QtCore.framework/Versions/A/Headers/qxptype_traits.h
  mdp:/opt/homebrew/Cellar/qtbase/6.12.0/lib/QtCore.framework/Versions/A/Headers/qyieldcpu.h
@@ -3580,6 +3587,7 @@
  mdp:/Users/anshuman/Desktop/Orbit/apps/shell/include/Command.h
  mdp:/Users/anshuman/Desktop/Orbit/apps/shell/include/ProcessManager.h
  mdp:/Users/anshuman/Desktop/Orbit/build/apps/shell/orbit-shell_autogen/moc_predefs.h
+ mdp:/opt/homebrew/Cellar/qtbase/6.12.0/include/QtCore/QHash
  mdp:/opt/homebrew/Cellar/qtbase/6.12.0/include/QtCore/QObject
  mdp:/opt/homebrew/Cellar/qtbase/6.12.0/include/QtCore/QProcess
  mdp:/opt/homebrew/Cellar/qtbase/6.12.0/include/QtCore/QString
@@ -3628,6 +3636,7 @@
  mdp:/opt/homebrew/Cellar/qtbase/6.12.0/lib/QtCore.framework/Versions/A/Headers/qgenericatomic.h
  mdp:/opt/homebrew/Cellar/qtbase/6.12.0/lib/QtCore.framework/Versions/A/Headers/qglobal.h
  mdp:/opt/homebrew/Cellar/qtbase/6.12.0/lib/QtCore.framework/Versions/A/Headers/qglobalstatic.h
+ mdp:/opt/homebrew/Cellar/qtbase/6.12.0/lib/QtCore.framework/Versions/A/Headers/qhash.h
  mdp:/opt/homebrew/Cellar/qtbase/6.12.0/lib/QtCore.framework/Versions/A/Headers/qhashfunctions.h
  mdp:/opt/homebrew/Cellar/qtbase/6.12.0/lib/QtCore.framework/Versions/A/Headers/qiodevice.h
  mdp:/opt/homebrew/Cellar/qtbase/6.12.0/lib/QtCore.framework/Versions/A/Headers/qiodevicebase.h

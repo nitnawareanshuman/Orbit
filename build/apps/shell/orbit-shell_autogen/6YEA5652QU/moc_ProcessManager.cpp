@@ -46,7 +46,8 @@ template <> constexpr inline auto ProcessManager::qt_create_metaobjectdata<qt_me
         "processStarted",
         "pid",
         "processFinished",
-        "exitCode"
+        "exitCode",
+        "jobChanged"
     };
 
     QtMocHelpers::UintData qt_methods {
@@ -66,6 +67,8 @@ template <> constexpr inline auto ProcessManager::qt_create_metaobjectdata<qt_me
         QtMocHelpers::SignalData<void(int)>(7, 2, QMC::AccessPublic, QMetaType::Void, {{
             { QMetaType::Int, 8 },
         }}),
+        // Signal 'jobChanged'
+        QtMocHelpers::SignalData<void()>(9, 2, QMC::AccessPublic, QMetaType::Void),
     };
     QtMocHelpers::UintData qt_properties {
     };
@@ -93,6 +96,7 @@ void ProcessManager::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _
         case 1: _t->errorReady((*reinterpret_cast<std::add_pointer_t<QString>>(_a[1]))); break;
         case 2: _t->processStarted((*reinterpret_cast<std::add_pointer_t<qint64>>(_a[1]))); break;
         case 3: _t->processFinished((*reinterpret_cast<std::add_pointer_t<int>>(_a[1]))); break;
+        case 4: _t->jobChanged(); break;
         default: ;
         }
     }
@@ -104,6 +108,8 @@ void ProcessManager::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _
         if (QtMocHelpers::indexOfMethod<void (ProcessManager::*)(qint64 )>(_a, &ProcessManager::processStarted, 2))
             return;
         if (QtMocHelpers::indexOfMethod<void (ProcessManager::*)(int )>(_a, &ProcessManager::processFinished, 3))
+            return;
+        if (QtMocHelpers::indexOfMethod<void (ProcessManager::*)()>(_a, &ProcessManager::jobChanged, 4))
             return;
     }
 }
@@ -127,14 +133,14 @@ int ProcessManager::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 4)
+        if (_id < 5)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 4;
+        _id -= 5;
     }
     if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 4)
+        if (_id < 5)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 4;
+        _id -= 5;
     }
     return _id;
 }
@@ -161,5 +167,11 @@ void ProcessManager::processStarted(qint64 _t1)
 void ProcessManager::processFinished(int _t1)
 {
     QMetaObject::activate<void>(this, &staticMetaObject, 3, nullptr, _t1);
+}
+
+// SIGNAL 4
+void ProcessManager::jobChanged()
+{
+    QMetaObject::activate(this, &staticMetaObject, 4, nullptr);
 }
 QT_WARNING_POP

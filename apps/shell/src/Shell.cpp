@@ -1,161 +1,112 @@
 #include "Shell.h"
-
 #include <QDir>
 #include <QProcessEnvironment>
 
-Shell::Shell(QObject *parent)
-    : QObject(parent),
-      processManager(this)
+#ifdef Q_OS_UNIX
+#include <csignal>
+#endif
+
+Shell::Shell(QObject *parent) : QObject(parent), processManager(this)
 {
-    connect(
-        &processManager,
-        &ProcessManager::outputReady,
-        this,
-        &Shell::outputReady);
-
-    connect(
-        &processManager,
-        &ProcessManager::errorReady,
-        this,
-        &Shell::errorReady);
-
-    connect(
-        &processManager,
-        &ProcessManager::processFinished,
-        this,
-        [this](int exitCode)
-        {
-            emit outputReady(
-                QString("\n[process exited: %1]\n")
-                    .arg(exitCode));
-
-            emit promptChanged(currentDirectory());
-        });
-
-    connect(
-        &processManager,
-        &ProcessManager::processStarted,
-        this,
-        [this](qint64 pid)
-        {
-            emit outputReady(
-                QString("[started process %1]\n").arg(pid));
-        });
+    connect(&processManager, &ProcessManager::outputReady, this, &Shell::outputReady);
+    connect(&processManager, &ProcessManager::errorReady, this, &Shell::errorReady);
+    connect(&processManager, &ProcessManager::processFinished, this, [this](int) {
+        emit promptChanged(currentDirectory());
+    });
 }
 
-QString Shell::currentDirectory() const
-{
-    return QDir::currentPath();
-}
+QString Shell::currentDirectory() const { return QDir::currentPath(); }
 
 void Shell::executeLine(const QString &input)
 {
-    if (!running)
-        return;
-
+    if (!running) return;
     QString error;
-
     auto pipeline = CommandParser::parse(input, &error);
+    if (!pipeline) { emit errorReady("orbit: " + error + '\n'); return; }
+    if (pipeline->isEmpty()) return;
 
-    if (!pipeline)
-    {
-        emit errorReady("orbit: " + error + "\n");
-        return;
-    }
-
-    if (pipeline->isEmpty())
-        return;
-
-    // Initially, handle only standalone built-ins.
-    if (pipeline->commands.size() == 1)
-    {
+    if (pipeline->commands.size() == 1 && !pipeline->background) {
         const Command &command = pipeline->commands.first();
-
         const QString name = command.executable;
-
-        if (name == "cd" ||
-            name == "pwd" ||
-            name == "exit" ||
-            name == "echo")
-        {
+        if (name == "cd" || name == "pwd" || name == "exit" || name == "echo" ||
+            name == "jobs" || name == "fg" || name == "bg" || name == "kill" ||
+            name == "export" || name == "unset") {
             executeBuiltin(command);
             return;
         }
     }
-
-    processManager.execute(*pipeline);
+    processManager.execute(*pipeline, input);
 }
 
 void Shell::executeBuiltin(const Command &command)
 {
     const QString name = command.executable;
-
-    if (name == "pwd")
-    {
-        emit outputReady(currentDirectory() + "\n");
+    const QStringList args = command.arguments;
+    if (name == "pwd") { emit outputReady(currentDirectory() + '\n'); return; }
+    if (name == "cd") {
+        const QString path = args.isEmpty() || args.first() == "~"
+            ? QProcessEnvironment::systemEnvironment().value("HOME") : args.first();
+        if (path.isEmpty()) { emit errorReady("orbit: HOME is not set\n"); return; }
+        if (!QDir::setCurrent(path)) emit errorReady("orbit: cd: cannot access " + path + '\n');
+        emit promptChanged(currentDirectory()); return;
+    }
+    if (name == "exit") {
+        if (!args.isEmpty()) { emit errorReady("orbit: exit: too many arguments\n"); return; }
+        stop(); return;
+    }
+    if (name == "echo") { emit outputReady(args.join(' ') + '\n'); return; }
+    if (name == "jobs") { emit outputReady(processManager.jobsText()); return; }
+    if (name == "fg" || name == "bg" || name == "kill") {
+        if (args.isEmpty()) { emit errorReady("orbit: " + name + ": job id required\n"); return; }
+        bool ok = false;
+        int id = args.last().toInt(&ok);
+        if (!ok) { QString value = args.last(); if (value.startsWith('%')) value.remove(0, 1); id = value.toInt(&ok); }
+        if (!ok) { emit errorReady("orbit: " + name + ": invalid job id\n"); return; }
+        bool success = false;
+        if (name == "fg") success = processManager.foreground(id);
+        else if (name == "bg") success = processManager.background(id);
+        else {
+#ifdef Q_OS_UNIX
+            int sig = SIGTERM;
+            if (args.size() > 1 && args.first().startsWith('-')) {
+                const QString signalName = args.first().mid(1).toUpper();
+                if (signalName == "KILL") sig = SIGKILL;
+                else if (signalName == "INT") sig = SIGINT;
+                else if (signalName == "STOP") sig = SIGSTOP;
+                else if (signalName == "CONT") sig = SIGCONT;
+            }
+            success = processManager.signalJob(id, sig);
+#else
+            success = processManager.signalJob(id, 15);
+#endif
+        }
+        if (!success) emit errorReady("orbit: " + name + ": no such active job: %" + QString::number(id) + '\n');
         return;
     }
-
-    if (name == "cd")
-    {
-        QString path;
-
-        if (command.arguments.isEmpty() ||
-            command.arguments.first() == "~")
-        {
-            path = QProcessEnvironment::systemEnvironment()
-                       .value("HOME");
+    if (name == "export") {
+        if (args.isEmpty()) {
+            const auto env = QProcessEnvironment::systemEnvironment().toStringList();
+            emit outputReady(env.join('\n') + '\n'); return;
         }
-        else
-        {
-            path = command.arguments.first();
+        for (const QString &assignment : args) {
+            const int separator = assignment.indexOf('=');
+            if (separator <= 0) { emit errorReady("orbit: export: expected NAME=value\n"); continue; }
+            qputenv(assignment.left(separator).toLocal8Bit(), assignment.mid(separator + 1).toLocal8Bit());
         }
-
-        if (path.isEmpty())
-        {
-            emit errorReady("orbit: HOME is not set\n");
-            return;
-        }
-
-        if (!QDir::setCurrent(path))
-        {
-            emit errorReady(
-                "orbit: cd: cannot access " + path + "\n");
-        }
-
         emit promptChanged(currentDirectory());
         return;
     }
-
-    if (name == "exit")
-    {
-        if (!command.arguments.isEmpty())
-        {
-            emit errorReady(
-                "orbit: exit: too many arguments\n");
-            return;
-        }
-
-        stop();
-    }
-
-    if (name == "echo")
-    {
-        emit outputReady(
-            command.arguments.join(" ") + "\n");
-
-        return;
+    if (name == "unset") {
+        for (const QString &key : args) qunsetenv(key.toLocal8Bit().constData());
+        emit promptChanged(currentDirectory());
     }
 }
 
 void Shell::stop()
 {
-    if (!running)
-        return;
-
+    if (!running) return;
     running = false;
     processManager.terminate();
-
     emit outputReady("Orbit Shell terminated.\n");
     emit shellExited();
 }
